@@ -1,0 +1,30 @@
+<header id="nav-bar" class="container">
+  <span class="original_h1">Galrally</span><h1><small style="margin-left:20px"><%= ( @blog.blank? ? "ギャル" : @blog.title) %>の無料エロ動画</small></h1>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="span13">
+      <blockquote>
+      <%= link_to("新着", "/", :style => "margin-right: 20px;") %>
+      <% @tags.each do |tag| %>
+        <% if tag.id == @tag_id.to_i%>
+          <h2 style="margin-right: 20px;display:inline;"><%= tag.tag %></h2>
+        <% else %>
+          <%= link_to tag.tag, tag_path(tag), :style => "margin-right: 20px;" %>
+        <% end %>
+      <% end %>
+      </blockquote>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span13">
+      <%= paginate @blogs %>
+      <div id="listview" class="listview grid-layout">
+        <%= render partial: "/blogs/thumb_list" %>
+      </div>
+      <%= paginate @blogs %>
+    </div>
+    <div id="top_btn" class="icon-arrow-up--upload"></div>
+  </div>
+</div>
+<%= render partial: "/top/body_footar" %>

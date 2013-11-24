@@ -1,0 +1,30 @@
+<%= form_tag("/review") do |f| %>
+  <%= submit_tag "審査完了" %><br/>
+  <% @reviews.each_with_index do |review, i| %>
+    <%= check_box_tag "check[#{review.id}]", 0,1,{:style => "display:none"} %>
+    <div style="float:left;margin:5px;" id="<%= review.id %>" class="review_thumb">
+      <% case review.site%>
+      <% when XVIDEOS %>
+        <% (1..20).each do |i| %>
+          <%= image_tag("#{review.thumbnail_url.gsub(/\.[\d]*\.jpg$/, "")}.#{i}.jpg", :size => "180x135", :style => (i == 1 ? "" : "display:none")) %>
+        <% end %>
+      <% when SPANKWIRE %>
+        <% (1..10).each do |i| %>
+          <%= image_tag("#{review.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "")}/#{i}.jpg", :size => "180x135", :style => (i == 1 ? "" : "display:none")) %>
+        <% end %>
+      <% when TUBE8 %>
+        <% (1..16).each do |i| %>
+          <%= image_tag("#{review.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "")}/#{i}.jpg", :size => "180x135", :style => (i == 1 ? "" : "display:none")) %>
+        <% end %>
+      <% when TOKYOTUBE %>
+        <% (1..10).each do |i| %>
+          <%= image_tag("#{review.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "")}/#{i}.jpg", :size => "180x135", :style => (i == 1 ? "" : "display:none")) %>
+        <% end %>
+      <% when ASG %>
+        <% (0..25).each do |i| %>
+          <%= image_tag("#{review.thumbnail_url}#{i}", :size => "180x135", :style => (i == 1 ? "" : "display:none")) %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

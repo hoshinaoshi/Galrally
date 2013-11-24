@@ -1,0 +1,35 @@
+<%= render partial: "/top/body_headar" %>
+<div class="container">
+  <div class="row">
+    <div class="span13">
+      <div id="page_num" value="<%= @shows.num_pages %>"></div>
+      <div id="tag_id" value="<%= @tag_id %>"></div>
+      <button id="next_page_btn" class="btn btn-xlarge btn-block" type="button" value="<%= @page %>" style="margin-bottom: 20px;"><%=  image_tag '/images/progress-indeterminate-ring-dark-small.gif', :style => "display:none", :id => "progress" %>Next Movies</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span13">
+      <blockquote>
+      <%= @tag_id.blank? ? "<span style='margin-right: 20px;'>新着</span>".html_safe : link_to("新着", "/", :style => "margin-right: 20px;") %>
+      <% @tags.each do |tag| %>
+        <% if tag.id == @tag_id.to_i%>
+          <h2 style="margin-right: 20px;display:inline;"><%= tag.tag %></h2>
+        <% else %>
+          <%= link_to tag.tag, tag_path(tag), :style => "margin-right: 20px;" %>
+        <% end %>
+      <% end %>
+      </blockquote>
+    </div>
+  </div>
+  <div class="row">
+     <div class="span7">
+        <div id="listview" class="listview grid-layout">
+          <%= render partial: "/top/thumb_list" %>
+        </div>
+     </div>
+     <div class="span6" id="show_detail">
+     </div>
+     <div id="top_btn" class="icon-arrow-up--upload"></div>
+  </div>
+</div>
+<%= render partial: "/top/body_footar" %>

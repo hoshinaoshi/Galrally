@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  string: 
+  thumbnail_url: MyString
+  site: 1
+  scraping_flag: false
+  new_flag: false
+
+two:
+  string: 
+  thumbnail_url: MyString
+  site: 1
+  scraping_flag: false
+  new_flag: false

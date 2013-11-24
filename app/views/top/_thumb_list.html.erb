@@ -1,0 +1,28 @@
+<% @shows.each_with_index do |show, i| %>
+  <div id="<%= show.movie_id %>" class="listview-item <%# BACK_GROUND_COLOR_HASH[rand(6)]%>" style="width:180px;heigth:130px;" value="0">
+    <div style="float:left;margin:5px;" id="<%= show.id %>" class="review_thumb">
+      <% case show.site%>
+      <% when XVIDEOS %>
+        <% (1..20).each do |i| %>
+          <%= image_tag("#{show.thumbnail_url.gsub(/\.[\d]*\.jpg$/, "")}.#{i}.jpg", :size => "180x130", :style => (i == 1 ? "" : "display:none"), :name => XVIDEOS) %>
+        <% end %>
+      <% when SPANKWIRE %>
+        <% (2..10).each do |i| %>
+          <%= image_tag("#{show.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "")}/#{i}.jpg", :size => "180x130", :style => (i == 2 ? "" : "display:none"), :name => SPANKWIRE) %>
+        <% end %>
+      <% when TUBE8 %>
+        <% (2..16).each do |i| %>
+          <%= image_tag("#{show.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "")}/#{i}.jpg", :size => "180x130", :style => (i == 2 ? "" : "display:none"), :name => TUBE8) %>
+        <% end %>
+      <% when TOKYOTUBE %>
+        <% (1..10).each do |i| %>
+          <%= image_tag("#{show.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "")}/#{i}.jpg", :size => "180x130", :style => (i == 1 ? "" : "display:none"), :name => TOKYOTUBE) %>
+        <% end %>
+      <% when ASG %>
+        <% (0..25).each do |i| %>
+          <%= image_tag("#{show.thumbnail_url}#{i}", :size => "180x130", :style => (i == 1 ? "" : "display:none"), :name => ASG) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

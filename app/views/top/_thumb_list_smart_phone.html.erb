@@ -1,0 +1,18 @@
+<% @shows.each_with_index do |show, i| %>
+  <div id="<%= show.movie_id %>" class="listview-item <%# BACK_GROUND_COLOR_HASH[rand(6)]%>" style="width:180px;heigth:130px;" value="0">
+    <div style="float:left;margin:5px;" id="<%= show.id %>" class="review_thumb">
+      <% case show.site%>
+      <% when XVIDEOS %>
+        <%= image_tag(show.thumbnail_url, :size => "180x130", :name => XVIDEOS) %>
+      <% when SPANKWIRE %>
+        <%= image_tag(show.thumbnail_url, :size => "180x130", :name => SPANKWIRE) %>
+      <% when TUBE8 %>
+        <%= image_tag(show.thumbnail_url, :size => "180x130", :name => TUBE8) %>
+      <% when TOKYOTUBE %>
+        <%= image_tag(show.thumbnail_url, :size => "180x130", :name => TOKYOTUBE) %>
+      <% when ASG %>
+        <%= image_tag("#{show.thumbnail_url}2", :size => "180x130", :name => ASG) %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

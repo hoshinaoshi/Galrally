@@ -1,0 +1,76 @@
+<header id="nav-bar" class="container">
+  <span class="original_h1">Galrally</span><h1><small style="margin-left:20px"><%= ( @blog.blank? ? "ギャル" : @blog.title ) %>の無料エロ動画</small></h1>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="span13">
+      <blockquote>
+      <%= link_to("新着", "/", :style => "margin-right: 20px;") %>
+      <% @tags.each do |tag| %>
+        <% if tag.id == @tag_id.to_i%>
+          <h2 style="margin-right: 20px;display:inline;"><%= tag.tag %></h2>
+        <% else %>
+          <%= link_to tag.tag, tag_path(tag), :style => "margin-right: 20px;" %>
+        <% end %>
+      <% end %>
+      </blockquote>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span13">
+      <div class="blog_show_thumb">
+        <h2 style="margin-bottom:10px;"><%= @blog.title %></h2>
+      </div>
+    </div>
+    <div class="span13">
+      <% id = @blog.show.movie_id%>
+      <% case @blog.show.site%>
+      <% when XVIDEOS %>
+        <iframe style="float:left" src='http://flashservice.xvideos.com/embedframe/<%= id %>' frameborder=0 width=510 height=400 scrolling=no></iframe>
+      <% when SPANKWIRE %>
+        <iframe style="float:left" src='http://www.spankwire.com/EmbedPlayer.aspx?ArticleId=<%= id %>' frameborder='0' height='530' width='660' scrolling='no'></iframe>
+      <% when TUBE8 %>
+        <iframe style="float:left" src='http://www.tube8.com/embed/asian/<%= id %>' frameborder='0' height='481' width='608' scrolling='no'></iframe>
+      <% when TOKYOTUBE %>
+        <iframe style="float:left" src='http://www.tokyo-tube.com/media/player/player.swf?f=http://www.tokyo-tube.com/media/player/config_embed.php?vkey=<%= id %>' frameborder='0' height='400' width='510' scrolling='no'></iframe>
+      <% when ASG %>
+        <iframe src='http://asg.to/blogFrame.html?mcd=<%= id %>&width=475&height=397' style='float:left; width: 475px; height: 397px; border: none;' frameborder='0' scrolling='no'></iframe>
+      <% end %>
+        <div class="blog_contents"><%= @blog.content %></div>
+        <% if @prev_id.present? %>  
+          <a class="btn btn-info" style="margin:50px 0px 0px 50px;" href="/blogs/<%=@prev_id%>"><h4 class="listview-item-heading">前の記事へ</h4></a>
+        <% end %>
+        <% if @next_id.present? %>  
+          <a class="btn btn-info" style="margin:50px 0px 0px 50px;" href="/blogs/<%=@next_id%>"><h4 class="listview-item-heading">次の記事へ</h4></a>
+        <% end %>
+    </div>
+    <div class="span13">
+      <div style="float:left">
+        <h3>ダイジェスト</h3>
+        <% case @blog.show.site%>
+        <% when XVIDEOS %>
+          <% (1..20).each do |i| %>
+            <%= image_tag("#{@blog.show.thumbnail_url.gsub(/\.[\d]*\.jpg$/, "")}.#{i}.jpg", :size => "180x130") %>
+          <% end %>
+        <% when SPANKWIRE %>
+          <% (2..10).each do |i| %>
+            <%= image_tag("#{@blog.show.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "")}/#{i}.jpg", :size => "180x130") %>
+          <% end %>
+        <% when TUBE8 %>
+          <% (2..16).each do |i| %>
+            <%= image_tag("#{@blog.show.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "")}/#{i}.jpg", :size => "180x130") %>
+          <% end %>
+        <% when TOKYOTUBE %>
+          <% (1..10).each do |i| %>
+            <%= image_tag("#{@blog.show.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "")}/#{i}.jpg", :size => "180x130") %>
+          <% end %>
+        <% when ASG %>
+          <% (0..25).each do |i| %>
+            <%= image_tag("#{@blog.show.thumbnail_url}#{i}", :size => "180x130") %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "/top/body_footar" %>

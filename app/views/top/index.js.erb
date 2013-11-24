@@ -1,0 +1,111 @@
+<% @shows.each_with_index do |show, i| %>
+  // 親要素
+  var div_parent = document.createElement('div');
+  div_parent.setAttribute("id","<%= show.movie_id %>");
+  div_parent.setAttribute("class","listview-item add_listview-item<%=@page%>");
+  div_parent.setAttribute("style","width:180px;heigth:135px;");
+  div_parent.setAttribute("value","0");
+  
+  // 子要素
+  var div_child = document.createElement('div');
+  div_child.setAttribute("id","<%= show.id %>");
+  div_child.setAttribute("class","review_thumb");
+  div_child.setAttribute("style","float:left;margin:5px;");
+
+  // サムネイル
+  <% if show.site == XVIDEOS %>
+    for(var i = 1; i <= 20; i++){
+      var img = document.createElement('img');
+      img.setAttribute("src", "<%= show.thumbnail_url.gsub(/\.[\d]*\.jpg$/, "") %>." + i + ".jpg");
+      img.setAttribute("width","180");
+      img.setAttribute("height","130");
+      img.setAttribute("name","<%= XVIDEOS %>");
+      if(i != 1){
+        img.setAttribute("style","display:none");
+      }
+      div_child.appendChild(img);
+    }
+  <% elsif show.site == SPANKWIRE %> 
+    for(var i = 2; i <= 10; i++){
+      var img = document.createElement('img');
+      img.setAttribute("src", "<%= show.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "") %>/" + i + ".jpg");
+      img.setAttribute("width","180");
+      img.setAttribute("height","130");
+      img.setAttribute("name","<%= SPANKWIRE %>");
+      if(i != 2){
+        img.setAttribute("style","display:none");
+      }
+      div_child.appendChild(img);
+    }
+  <% elsif show.site == TUBE8 %> 
+    for(var i = 2; i <= 16; i++){
+      var img = document.createElement('img');
+      img.setAttribute("src", "<%= show.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "") %>/" + i + ".jpg");
+      img.setAttribute("width","180");
+      img.setAttribute("height","130");
+      img.setAttribute("name","<%= TUBE8 %>");
+      if(i != 2){
+        img.setAttribute("style","display:none");
+      }
+      div_child.appendChild(img);
+    }
+  <% elsif show.site == TOKYOTUBE %> 
+    for(var i = 1; i <= 10; i++){
+      var img = document.createElement('img');
+      img.setAttribute("src", "<%= show.thumbnail_url.gsub(/\/[\d]*\.jpg$/, "") %>/" + i + ".jpg");
+      img.setAttribute("width","180");
+      img.setAttribute("height","130");
+      img.setAttribute("name","<%= TOKYOTUBE %>");
+      if(i != 1){
+        img.setAttribute("style","display:none");
+      }
+      div_child.appendChild(img);
+    }
+  <% elsif show.site == ASG %> 
+    for(var i = 0; i <= 25; i++){
+      var img = document.createElement('img');
+      img.setAttribute("src", "<%= show.thumbnail_url %>" + i );
+      img.setAttribute("width","180");
+      img.setAttribute("height","130");
+      img.setAttribute("name","<%= ASG %>");
+      if(i != 1){
+        img.setAttribute("style","display:none");
+      }
+      div_child.appendChild(img);
+    }
+  <% end %>
+  div_parent.appendChild(div_child);
+  $("#listview").append(div_parent);
+<% end %>
+$("#next_page_btn").attr("value","<%= @page %>")
+$("#js_load").text("");
+$("#js_load").append("<script cache='true' src='/javascripts/cycle.js'></script>");
+
+// 詳細表示
+$(".add_listview-item<%=@page%>").click(function () {
+  id = $(this).attr("id");
+  
+  // 選択画像をわかりやすく
+  if($(this).attr("value") == 0){
+    $(this).attr("value", 1);
+    $(this).fadeTo("4000",0.5);
+    site = $(this).find("div.review_thumb").find("img").attr("name")
+    if( site == 0){
+      $("#show_detail").append("<iframe id='show_detail_" + id + "' src='http://flashservice.xvideos.com/embedframe/" + id +"' frameborder=0 width=510 height=400 scrolling=no></iframe>")
+    }else if( site == 1){
+      $("#show_detail").append("<iframe id='show_detail_" + id + "' src='http://www.spankwire.com/EmbedPlayer.aspx?ArticleId="+ id +"' frameborder='0' height='530' width='660' scrolling='no'></iframe>")
+    }else if( site == 2){
+      $("#show_detail").append("<iframe id='show_detail_" + id.replace(/[\/%]/g,"_") + "' src='http://www.tube8.com/embed/asian/"+ id +"' frameborder='0' height='481' width='608' scrolling='no'></iframe>")
+    }else if( site == 3){
+      $("#show_detail").append("<iframe id='show_detail_" + id + "' src='http://www.tokyo-tube.com/media/player/player.swf?f=http://www.tokyo-tube.com/media/player/config_embed.php?vkey="+ id +"' frameborder='0' height='400' width='510' scrolling='no'></iframe>")
+    }else if( site == 4){
+      $("#show_detail").append("<iframe id='show_detail_" + id + "' src='http://asg.to/blogFrame.html?mcd="+ id +"&width=475&height=397' style='width: 475px; height: 397px; border: none;' frameborder='0' scrolling='no'></iframe>")
+    }
+  }else{
+    $(this).attr("value", 0);
+    $(this).fadeTo("4000",1.0);
+    id = id.replace(/[\/%]/g,"_")
+    $("#show_detail_" + id).fadeTo("4000",0);
+    $("#show_detail_" + id).remove();
+  }
+});

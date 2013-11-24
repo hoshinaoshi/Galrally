@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="robots" content="INDEX,FOLLOW">
+    <meta name="description" content="Galrally - 日本人ギャル動画を集めたエロサイト。複数のサイトから集めた日本人黒ギャルや白ギャルのエロ動画を紹介します。">
+    <meta name="Keywords" content="エロ,アダルト,ギャル,黒ギャル,白ギャル" lang="ja"> 
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <meta name="robots" content="nofollow">
+    <title><%= ( @blog.blank? ? "ギャル" : @blog.title ) %>の無料エロ動画 - Galrally</title>
+    <%= javascript_include_tag "jquery-1.10.0", :cache => true %>
+    <%= stylesheet_link_tag "bootmetro","bootmetro-ui-light","datepicker","bootmetro-icons","bootmetro-responsive","basic" %>
+    <%= favicon_link_tag 'favicon.ico' %>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-43061002-1', 'galrally.info');
+    ga('send', 'pageview');
+
+  </script>
+  </head>
+  <body>
+    <%= yield %>
+  </body>
+</html>

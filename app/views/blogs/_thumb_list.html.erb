@@ -1,0 +1,20 @@
+<% @blogs.each_with_index do |blog, i| %>
+  <div class="blog_thumb">
+    <h3 class="blog_title"><a href="/blogs/<%= blog.id %>" title="<%= blog.title %>" alt="<%= blog.title %>"><%= blog.title %></a></h3>
+    <a href="/blogs/<%= blog.id %>" title="<%= blog.title %>" alt="<%= blog.title %>" style="float:left">
+      <% case blog.show.site%>
+      <% when XVIDEOS %>
+        <%= image_tag(blog.show.thumbnail_url, :size => "180x130", :name => XVIDEOS) %>
+      <% when SPANKWIRE %>
+        <%= image_tag(blog.show.thumbnail_url, :size => "180x130", :name => SPANKWIRE) %>
+      <% when TUBE8 %>
+        <%= image_tag(blog.show.thumbnail_url, :size => "180x130", :name => TUBE8) %>
+      <% when TOKYOTUBE %>
+        <%= image_tag(blog.show.thumbnail_url, :size => "180x130", :name => TOKYOTUBE) %>
+      <% when ASG %>
+        <%= image_tag("#{blog.show.thumbnail_url}3", :size => "180x130", :name => ASG) %>
+      <% end %>
+    </a>
+    <div class="blog_contents"><%= blog.content %></div>
+  </div>
+<% end %>
