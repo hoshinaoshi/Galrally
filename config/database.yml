@@ -11,12 +11,13 @@
 development:
   adapter: mysql2
   encoding: utf8
-  reconnect: true
+  reconnect: false
   database: gyal
   pool: 5
   username: root
-  password: hinntohatukue
-  host: mydb.cxcuhk5jhg4o.ap-northeast-1.rds.amazonaws.com
+  password: "@a1234567"
+  host: localhost
+  socket: /var/lib/mysql/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
