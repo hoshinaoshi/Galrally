@@ -7,7 +7,9 @@ class TokyoTube
         thumb.search("a").each_with_index do |a,i|
           break if i == 1
           a.attribute("href").value =~ /\/\d+\//
-          id = $&.gsub("/","")
+          regx1 = $&
+          next if regx1.blank?
+          id = regx1.gsub("/","")
           
           img_tag = a.search("img")
           image_url = img_tag.attribute("src").value
