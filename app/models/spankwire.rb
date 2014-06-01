@@ -2,6 +2,7 @@
 class Spankwire
   def self.scraping(site, url)
     (1..20).each do |page|
+      sleep(10)
       doc = Nokogiri.HTML(open(url + "/categories/Straight/Asian/Submitted/40?page=" + page.to_s ))
       doc.search("div[@class='title-video'] a").each do |thumb|
         id = thumb.attribute("href").value
